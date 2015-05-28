@@ -99,6 +99,14 @@ class ErrorTest extends Bugsnag_TestCase
         $this->assertEquals($errorArray['severity'], 'error');
     }
 
+    public function testRecoverableErrorSeverity()
+    {
+        $this->error->setPHPError(E_RECOVERABLE_ERROR, "Broken", "file", 123);
+
+        $errorArray = $this->error->toArray();
+        $this->assertEquals($errorArray['severity'], 'error');
+    }
+
     public function testManualSeverity()
     {
         $this->error->setSeverity("error");
@@ -129,7 +137,7 @@ class ErrorTest extends Bugsnag_TestCase
             $this->assertEquals($errorArray['exceptions'][1]['message'], 'secondly');
         }
     }
-    
+
     public function testErrorGroupingHash()
     {
         $this->error->setGroupingHash('herp#derp');
@@ -137,7 +145,7 @@ class ErrorTest extends Bugsnag_TestCase
         $errorArray = $this->error->toArray();
         $this->assertEquals($errorArray['groupingHash'], 'herp#derp');
     }
-    
+
     public function testErrorGroupingHashNotSet()
     {
         $errorArray = $this->error->toArray();
