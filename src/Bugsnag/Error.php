@@ -48,8 +48,7 @@ class Bugsnag_Error
         return $error;
     }
 
-    // Private constructor (for use only by the static methods above)
-    private function __construct(Bugsnag_Configuration $config, Bugsnag_Diagnostics $diagnostics)
+    public function __construct(Bugsnag_Configuration $config, Bugsnag_Diagnostics $diagnostics)
     {
         $this->config = $config;
         $this->diagnostics = $diagnostics;
